@@ -9,5 +9,11 @@ server.bind((IP, PORT))
 server.listen()
 print(f"[LISTENING] El servidor esta esperando conexiones en {IP}")
 
+conn, addr = server.accept()
+print(f"[CONNECTED] Nueva conexion en {addr}")
+
 while True:
-  pass
+  
+  msg = conn.recv(1024).decode("utf-8")
+  print(f"[CLIENT] El cliente dice: {msg}")
+  conn.send("RECIBIDO".encode("utf-8"))
