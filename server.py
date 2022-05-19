@@ -2,7 +2,7 @@ import socket
 
 IP = socket.gethostbyname(socket.gethostname())
 PORT = 8000
-HEADER = 0
+HEADER = 1024
 
 server = socket.socket()
 server.bind((IP, PORT))
@@ -14,6 +14,6 @@ print(f"[CONNECTED] Nueva conexion en {addr}")
 
 while True:
   
-  msg = conn.recv(1024).decode("utf-8")
+  msg_len = int(conn.recv(HEADER).decode("utf-8"))
+  msg = conn.recv(msg_len).decode("utf-8")
   print(f"[CLIENT] El cliente dice: {msg}")
-  conn.send("RECIBIDO".encode("utf-8"))
