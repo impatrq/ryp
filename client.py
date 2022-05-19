@@ -14,4 +14,4 @@ while True:
   msg_len = str(len(msg))
   msg_len += " " * (HEADER - len(msg_len))
   client.send(msg_len.encode("utf-8"))
-  client.send(msg)
+  client.send(msg.encode("utf-8"))
